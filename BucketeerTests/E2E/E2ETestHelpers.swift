@@ -16,10 +16,14 @@ let GOAL_VALUE = 1.0
 
 @available(iOS 13, *)
 extension BKTConfig {
-    static func e2e(featureTag: String = FEATURE_TAG) throws -> BKTConfig {
-        let apiKey = ProcessInfo.processInfo.environment["E2E_API_KEY"]!
-        let apiEndpoint = ProcessInfo.processInfo.environment["E2E_API_ENDPOINT"]!
+    static func e2e(featureTag: String = FEATURE_TAG, bundle: Bundle) throws -> BKTConfig {
+//        let bundle = Bundle(for: type(of: self))
+        let apiKey = bundle.infoDictionary?["API_KEY"] as! String
+        let apiEndpoint = bundle.infoDictionary?["API_ENDPOINT"] as! String
 
+        print("kaki bundle = \(bundle)\n")
+        print("kaki apiKey = \(apiKey)\n")
+        print("kaki apiEndpoint = \(apiEndpoint)\n")
         let builder = BKTConfig.Builder()
             .with(apiKey: apiKey)
             .with(apiEndpoint: apiEndpoint)

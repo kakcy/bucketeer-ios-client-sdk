@@ -34,5 +34,5 @@ API_KEY = ${API_KEY}
 EOF
 )
 
-echo "$xcconfig" > ./environment.xcconfig
-echo "Updated ./environment.xcconfig"
+echo "$xcconfig" > ./Resources/environment.xcconfig
+echo "Updated ./Resources/environment.xcconfig"

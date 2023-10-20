@@ -78,16 +78,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func makeConfigUsingBuilder() -> BKTConfig {
         let bundle = Bundle(for: type(of: self))
-        let path = bundle.path(forResource: "Info", ofType: "plist")!
-        let dic = NSDictionary(contentsOfFile: path) as! [String: Any]
-        let apiKey = dic["apiKey"] as! String
-        let apiEndpoint = dic["apiEndpoint"] as! String
-        
         let builder = BKTConfig.Builder()
-            .with(apiKey: apiKey)
-            .with(apiEndpoint: apiEndpoint)
+            .with(apiKey: bundle.infoDictionary?["API_KEY"] as! String)
+            .with(apiEndpoint: bundle.infoDictionary?["API_ENDPOINT"] as! String)
             .with(featureTag: "ios")
-            .with(pollingInterval: 5_000)
+            .with(pollingInterval: 150_000)
             .with(appVersion: bundle.infoDictionary?["CFBundleShortVersionString"] as! String)
 
         return try! builder.build()

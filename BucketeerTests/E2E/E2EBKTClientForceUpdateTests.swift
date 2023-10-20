@@ -29,7 +29,8 @@ final class E2EBKTClientForceUpdateTests: XCTestCase {
 
     // "userEvaluationsId is different and evaluatedAt is too old"
     func testUserEvaluationsIdMismatchAndEvaluatedAtTooOld () async throws {
-        let config = try BKTConfig.e2e()
+        let bundle = Bundle(for: type(of: self))
+        let config = try BKTConfig.e2e(bundle: bundle)
         let user = try BKTUser.Builder().with(id: USER_ID).build()
 
         let internalDataModule = try DataModuleImpl(user: user.toUser(), config: config)
@@ -87,7 +88,8 @@ final class E2EBKTClientForceUpdateTests: XCTestCase {
 
     // userEvaluationId is empty after feature_tag changed
     func testInitializeWithNewFeatureTag() async throws {
-        let config = try BKTConfig.e2e(featureTag: "android")
+        let bundle = Bundle(for: type(of: self))
+        let config = try BKTConfig.e2e(featureTag: "android", bundle: bundle)
         let userId = USER_ID
         let user = try BKTUser.Builder().with(id: userId).build()
         try await BKTClient.initialize(
@@ -132,7 +134,7 @@ final class E2EBKTClientForceUpdateTests: XCTestCase {
             try BKTClient.destroy()
         }
 
-        let configWithFeatureTag = try BKTConfig.e2e(featureTag: FEATURE_TAG)
+        let configWithFeatureTag = try BKTConfig.e2e(featureTag: FEATURE_TAG, bundle: bundle)
         try await BKTClient.initialize(
             config: configWithFeatureTag,
             user: user
@@ -155,7 +157,8 @@ final class E2EBKTClientForceUpdateTests: XCTestCase {
     }
 
     func testInitWithoutFeatureTagShouldRetrievesAllFeatures() async throws {
-        let config = try BKTConfig.e2e(featureTag: "")
+        let bundle = Bundle(for: type(of: self))
+        let config = try BKTConfig.e2e(featureTag: "", bundle: bundle)
         let userId = USER_ID
         let user = try BKTUser.Builder().with(id: userId).build()
         try await BKTClient.initialize(

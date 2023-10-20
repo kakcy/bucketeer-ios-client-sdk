@@ -12,7 +12,8 @@ final class E2EEvaluationTests: XCTestCase {
 
         UserDefaults.standard.removeObject(forKey: "bucketeer_user_evaluations_id")
 
-        let config = try BKTConfig.e2e()
+        let bundle = Bundle(for: type(of: self))
+        let config = try BKTConfig.e2e(bundle: bundle)
         let user = try BKTUser.Builder().with(id: USER_ID).build()
         try await BKTClient.initialize(
             config: config,
