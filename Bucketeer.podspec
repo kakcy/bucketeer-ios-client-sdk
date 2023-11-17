@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   s.source_files = 'Bucketeer/Sources/**/*.{swift,h,m}'
   s.source = {
     :git => 'https://github.com/kakcy/bucketeer-ios-client-sdk.git',
-    :tag => "v#{s.version}",
+    :tag => "test-xcodegen",
   }
 
   s.license = {
