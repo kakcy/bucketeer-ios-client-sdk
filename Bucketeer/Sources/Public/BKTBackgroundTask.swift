@@ -44,5 +44,9 @@ extension Scene {
         BKTBackgroundTask.enable()
         return self
     }
+    public func testFunc() -> some Scene {
+        print("testFunc")
+        return self
+    }
 }
 #endif
